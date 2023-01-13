@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="Container" stylesheets="@Registration.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.ifrn.portal.sm.controllers.TelaController">
+   <children>
+      <Button fx:id="botao" layoutX="503.0" layoutY="355.0" mnemonicParsing="false" onAction="#setMensagem" prefHeight="26.0" prefWidth="112.0" text="Click" />
+      <Label fx:id="mensagem" layoutX="356.0" layoutY="134.0" prefHeight="18.0" prefWidth="389.0" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="26.0" layoutY="35.0" prefHeight="422.0" prefWidth="200.0" style="-fx-border-color: white;">
+         <children>
+            <Button fx:id="botaoCadastro" layoutX="52.0" layoutY="31.0" mnemonicParsing="false" onAction="#setCenaCadastro" prefHeight="26.0" prefWidth="94.0" text="Cadastro" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
