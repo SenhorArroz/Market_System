@@ -30,15 +30,6 @@ public class App extends Application {
 	public void start(Stage primaryStage) {
 		try {
 //			
-//			try {
-//				Product produto = new Product("", 0.0, 1.2, 0.0);
-//				ProductService produtoService = new ProductService();
-//				produtoService.insert(produto);
-//			} catch (InvalidDataException e) {
-//				e.printStackTrace();
-//				e.getListContraintViolations().stream().forEach(v -> System.out.println(v.toString()));
-//			}
-//			
 			janela = primaryStage;
 			
 			//Exemplos
@@ -55,6 +46,8 @@ public class App extends Application {
 			App.janela.setScene(cenaInicio);
 			App.janela.show();
 			
+			System.out.println("DEu certo");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -67,6 +60,8 @@ public class App extends Application {
 		return loader.load();
 	}
 	
+	
+	//Alteracao
 	public static void main(String[] args) {
 		launch(args);
 	}

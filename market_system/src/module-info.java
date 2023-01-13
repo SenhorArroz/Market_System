@@ -21,8 +21,6 @@ module sistema_mercado {
 	requires javafx.fxml;
 	requires org.controlsfx.controls;
 	
-//	opens br.com.ifrn.portal.sm.views;
-//	opens br.com.ifrn.portal.sm.controllers;
 	opens br.com.ifrn.portal.sm.views to javafx.graphics, javafx.fxml;
 	opens br.com.ifrn.portal.sm.controllers to javafx.graphics, javafx.fxml;
 }
