@@ -22,7 +22,8 @@ import javafx.scene.control.TextField;
  * @version 1.0
  * @system CadastroController.java
  * @author erikv
- * @date 12:07:26 8 de jan. de 2023 2023
+ * @date 12:07:26 8 de jan. de 2023
+ * 
  */
 
 public class RegistrationController {
@@ -54,10 +55,7 @@ public class RegistrationController {
 	public void save() {
 		if(fieldValids()) {
 			product = new Product();
-			product.setDescricao(fieldDescription.getText());
-			product.setValor_custo(Double.parseDouble(fieldCost.getText()));
-			product.setPorcentagem_venda(Double.parseDouble(fieldPercentage.getText()));
-			product.setDesconto(Double.parseDouble(fieldDiscount.getText()));
+			product.setDescription(fieldDescription.getText());
 			
 			service = new ProductService();
 			

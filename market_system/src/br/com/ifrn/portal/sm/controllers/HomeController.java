@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
  * @date 12:07:50 8 de jan. de 2023 2023
  */
 
-public class TelaController {
+public class HomeController {
 	
 	@FXML
 	private Label mensagem;

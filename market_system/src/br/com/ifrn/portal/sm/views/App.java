@@ -29,7 +29,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-//			
+			
 			janela = primaryStage;
 			
 			//Exemplos
@@ -45,8 +45,6 @@ public class App extends Application {
 			
 			App.janela.setScene(cenaInicio);
 			App.janela.show();
-			
-			System.out.println("DEu certo");
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import lombok.Getter;
+
 /**
  * The Class DAOGeneric.
  *
@@ -22,6 +24,7 @@ import javax.persistence.TypedQuery;
  *  que toda entidade tem, proporcionando assim um reuso de código via heraça pelas demais classes.
  */
 
+@Getter
 public abstract class DAOGeneric<T> {
 	
 	/** The emf. */
@@ -105,7 +108,7 @@ public abstract class DAOGeneric<T> {
 	 * @param id the id
 	 * @return the t
 	 */
-	public T findById(Long id){
+	public T findById(Long id) {
 		return em.find(classe, id);
 	}
 	
