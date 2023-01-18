@@ -6,7 +6,7 @@ import org.controlsfx.control.Notifications;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
-import br.com.ifrn.portal.sm.models.services.ProductService;
+import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

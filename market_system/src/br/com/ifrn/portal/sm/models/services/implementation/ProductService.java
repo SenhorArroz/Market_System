@@ -1,4 +1,4 @@
-package br.com.ifrn.portal.sm.models.services;
+package br.com.ifrn.portal.sm.models.services.implementation;
 
 import java.util.ArrayList;
 import java.util.List;

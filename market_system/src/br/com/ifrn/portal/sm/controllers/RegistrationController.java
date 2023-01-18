@@ -13,7 +13,7 @@ import org.controlsfx.control.Notifications;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
-import br.com.ifrn.portal.sm.models.services.ProductService;
+import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
 import br.com.ifrn.portal.sm.views.App;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;

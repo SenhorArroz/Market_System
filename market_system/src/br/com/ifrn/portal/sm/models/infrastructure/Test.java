@@ -2,7 +2,7 @@ package br.com.ifrn.portal.sm.models.infrastructure;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
-import br.com.ifrn.portal.sm.models.services.ProductService;
+import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
 
 public class Test {
