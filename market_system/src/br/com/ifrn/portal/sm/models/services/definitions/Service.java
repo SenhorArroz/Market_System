@@ -7,7 +7,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import br.com.ifrn.portal.sm.models.entities.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Service<T> {
+public abstract class Service<T> {
 
 	private static ValidatorFactory factory;
 	

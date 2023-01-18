@@ -3,13 +3,16 @@ package br.com.ifrn.portal.sm.models.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.ifrn.portal.sm.models.entities.Brand;
 import br.com.ifrn.portal.sm.models.entities.Category;
 import br.com.ifrn.portal.sm.models.entities.Product;
+import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOProduct;
 import br.com.ifrn.portal.sm.models.services.utilities.PaginationInfo;
 import br.com.ifrn.portal.sm.models.services.definitions.EntityService;
 import br.com.ifrn.portal.sm.models.services.definitions.Service;
+import br.com.ifrn.portal.sm.models.services.utilities.ProductFindType;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
 import br.com.ifrn.portal.sm.models.services.utilities.Pagination;
 import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
@@ -112,32 +115,70 @@ public class ProductService extends Service<Product> implements EntityService<Pr
 	@Override
 	public PagedEntity<Product> findByName(String name, int numberPage) {
 		if(!name.isBlank() && numberPage > 0) {
-			PaginationInfo paginationInfo = calculatePaginationWithFilter(name, numberPage);
 			
-			List<Product> products = daoProduct.findByName(
-					name, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
-			
-			PagedEntity<Product> pagedEntity = new PagedEntity<Product>(products, paginationInfo);
+			PaginationInfo paginationInfo = calculatePaginationWithFilter(ProductFindType.BY_DESCRIPTION, name, numberPage);
+			PagedEntity<Product> pagedEntity = getPagedEntityByFindType(ProductFindType.BY_DESCRIPTION, paginationInfo ,name);
 			
 			return pagedEntity;
-			
 		}else {
 			throw new IllegalArgumentException("Nome de produto ou página inválida");
 		}
 	}
 	
+	/**
+	 * Find by category.
+	 *
+	 * @param category the category
+	 * @param numberPage the number page
+	 * @return the paged entity
+	 */
 	public PagedEntity<Product> findByCategory(Category category, int numberPage) {
 		if(category != null && numberPage > 0) {
 			
-			PaginationInfo paginationInfo = calculatePagination(numberPage);
-			List<Product> products = daoProduct.findByCategory(
-					category, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
-			
-			PagedEntity<Product> pagedEntity = new PagedEntity<Product>(products, paginationInfo);
+			PaginationInfo paginationInfo = calculatePaginationWithFilter(ProductFindType.BY_CATEGORY, category, numberPage);
+			PagedEntity<Product> pagedEntity = getPagedEntityByFindType(ProductFindType.BY_CATEGORY, paginationInfo, category);
 			
 			return pagedEntity;
 		}else {
 			throw new IllegalArgumentException("Categoria ou página inválida");
+		}
+	}
+	
+	/**
+	 * Find by brand.
+	 *
+	 * @param brand the brand
+	 * @param numberPage the number page
+	 * @return the paged entity
+	 */
+	public PagedEntity<Product> findByBrand(Brand brand, int numberPage) {
+		if(brand != null && numberPage > 0) {
+			
+			PaginationInfo paginationInfo = calculatePaginationWithFilter(ProductFindType.BY_BRAND, brand, numberPage);
+			PagedEntity<Product> pagedEntity = getPagedEntityByFindType(ProductFindType.BY_BRAND, paginationInfo, brand);
+			
+			return pagedEntity;
+		}else {
+			throw new IllegalArgumentException("Marca ou página inválida");
+		}
+	}
+	
+	/**
+	 * Find by unit measurement.
+	 *
+	 * @param unitMeasurement the unit measurement
+	 * @param numberPage the number page
+	 * @return the paged entity
+	 */
+	public PagedEntity<Product> findByUnitMeasurement(UnitMeasurement unitMeasurement, int numberPage) {
+		if(unitMeasurement != null && numberPage > 0) {
+			
+			PaginationInfo paginationInfo = calculatePaginationWithFilter(ProductFindType.BY_UNIT_MEASUREMENT, unitMeasurement, numberPage);
+			PagedEntity<Product> pagedEntity = getPagedEntityByFindType(ProductFindType.BY_UNIT_MEASUREMENT, paginationInfo, unitMeasurement);
+			
+			return pagedEntity;
+		}else {
+			throw new IllegalArgumentException("Unidade de medida ou página inválida");
 		}
 	}
 	
@@ -267,17 +308,116 @@ public class ProductService extends Service<Product> implements EntityService<Pr
 	/**
 	 * Calculate pagination with filter.
 	 *
+	 * @param findType the find type
 	 * @param searchValue the search value
 	 * @param numberPage the number page
 	 * @return the pagination info
 	 */
-	private PaginationInfo calculatePaginationWithFilter(String searchValue, int numberPage) {
+	private PaginationInfo calculatePaginationWithFilter(ProductFindType findType, Object searchValue, int numberPage) {
+		
+		if(searchValue == null || numberPage < 0) {
+			throw new UnsupportedOperationException("Parametros inválido(s)!");
+		}
+		
 		Pagination pagination = new Pagination();
+		PaginationInfo paginationInfo = null;
 		
-		int quantity = daoProduct.getQuantityProductsPerFilterDescription(searchValue);
-		PaginationInfo infoPagination =  pagination.getPagination(quantity, numberPage);
+		switch (findType) {
 		
-		return infoPagination;
+		case BY_DESCRIPTION: 
+			String description = (String) searchValue; 
+			
+			int quantityDescription = daoProduct.getQuantityProductsPerFilterDescription(description);
+			paginationInfo = pagination.getPagination(quantityDescription, numberPage);
+			
+			break;
+			
+		case BY_CATEGORY: 
+			Category category = (Category) searchValue;			
+			int quantityCategory = daoProduct.getQuantityProductsPerFilterCategory(category);
+			paginationInfo = pagination.getPagination(quantityCategory, numberPage);
+			
+			break;
+			
+		case BY_BRAND: 
+			Brand brand = (Brand) searchValue;
+			
+			int quantityBrand = daoProduct.getQuantityProductsPerFilterBrand(brand);
+			paginationInfo = pagination.getPagination(quantityBrand, numberPage);
+			
+			break;
+		
+		case BY_UNIT_MEASUREMENT: 
+			UnitMeasurement unitMeasurement = (UnitMeasurement) searchValue;
+			
+			int quantityUnitMeasurement = daoProduct.getQuantityProductsPerFilterUnitMeasurement(unitMeasurement);
+			paginationInfo = pagination.getPagination(quantityUnitMeasurement, numberPage);
+			
+			break;	
+			
+		default:
+			throw new UnsupportedOperationException("Tipo de busca não indentificado");
+		}
+		
+		return paginationInfo;
 	} 
+	
+	/**
+	 * Gets the paged entity by find type.
+	 *
+	 * @param findType the find type
+	 * @param paginationInfo the pagination info
+	 * @param valueToFind the value to find
+	 * @return the paged entity by find type
+	 */
+	private PagedEntity<Product> getPagedEntityByFindType(ProductFindType findType, 
+			PaginationInfo paginationInfo,  Object valueToFind ) {
+		
+		List<Product> products = new ArrayList<>();
+		
+		switch (findType) {
+		
+		case BY_DESCRIPTION:
+			String name = (String) valueToFind;
+			products = daoProduct.findByDescription(
+					name, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
+			break;
+			
+		case BY_CATEGORY:
+			Category category = (Category) valueToFind;
+			products = daoProduct.findByCategory(
+					category, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
+			break;
+			
+		case BY_BRAND:
+			Brand brand = (Brand) valueToFind;
+			products = daoProduct.findByBrand(
+					brand, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
+			break;
+			
+		case BY_UNIT_MEASUREMENT:
+			UnitMeasurement unitMeasurement = (UnitMeasurement) valueToFind;
+			products = daoProduct.findByUnitMeasurement(
+					unitMeasurement, paginationInfo.getEntitiesPerPage(), paginationInfo.getStart());
+			break;
+			
+		default:
+			throw new UnsupportedOperationException("Tipo de busca não indentificado");
+		}
+		
+		return convertToPagedEntity(products, paginationInfo);
+	}
+	
+	/**
+	 * Convert to paged entity.
+	 *
+	 * @param products the products
+	 * @param paginationInfo the pagination info
+	 * @return the paged entity
+	 */
+	@Override
+	public PagedEntity<Product> convertToPagedEntity(List<Product> products, PaginationInfo paginationInfo){
+		return new PagedEntity<Product>(products, paginationInfo);
+	}
 	
 }

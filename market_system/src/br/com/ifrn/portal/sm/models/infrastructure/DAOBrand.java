@@ -1,5 +1,9 @@
 package br.com.ifrn.portal.sm.models.infrastructure;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import br.com.ifrn.portal.sm.models.entities.Brand;
 
 /**
@@ -13,6 +17,24 @@ public class DAOBrand extends DAOGeneric<Brand>{
 
 	public DAOBrand() {
 		super(Brand.class);
+	}
+	
+	public List<Brand> findByName(String name, int limit, int skip) {
+		TypedQuery<Brand> query = getEm().createNamedQuery("findBrandByName", Brand.class);
+		query.setParameter("searchDescription", "%" + name + "%");
+		query.setFirstResult(skip);
+		query.setMaxResults(limit);
+		
+		return query.getResultList();
+	}
+	
+	public int getQuantityBrandsPerFilterDescription(String searchValue) {
+		TypedQuery<Long> query = getEm().createNamedQuery("numberBrandsPerFilterName", Long.class);
+		query.setParameter("searchValue", "%" + searchValue + "%");
+		
+		long quantity = query.getSingleResult();
+		
+		return (int) quantity;
 	}
 
 	

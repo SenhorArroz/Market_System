@@ -33,9 +33,9 @@ public class DAOProduct extends DAOGeneric<Product>{
 		}
 	}
 	
-	public List<Product> findByName(String name, int limit, int skip) {
-		TypedQuery<Product> query = getEm().createNamedQuery("findByName", Product.class);
-		query.setParameter("searchName", "%" + name + "%");
+	public List<Product> findByDescription(String description, int limit, int skip) {
+		TypedQuery<Product> query = getEm().createNamedQuery("findByDescription", Product.class);
+		query.setParameter("searchDescription", "%" + description + "%");
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
 		return query.getResultList();
@@ -60,7 +60,7 @@ public class DAOProduct extends DAOGeneric<Product>{
 	}
 	
 	public List<Product> findByUnitMeasurement(UnitMeasurement unitMeasurement, int limit, int skip){
-		TypedQuery<Product> query = getEm().createNamedQuery("findByBrand", Product.class);
+		TypedQuery<Product> query = getEm().createNamedQuery("findByUnitMeasurement", Product.class);
 		query.setParameter("unitMeasurement", unitMeasurement);
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
@@ -71,7 +71,33 @@ public class DAOProduct extends DAOGeneric<Product>{
 	public int getQuantityProductsPerFilterDescription(String searchValue) {
 		TypedQuery<Long> query = getEm().createNamedQuery("numberProductsPerFilterDescription", Long.class);
 		query.setParameter("searchValue", "%" + searchValue + "%");
-		System.out.println(searchValue);
+		
+		long quantity = query.getSingleResult();
+		
+		return (int) quantity;
+	}
+	
+	public int getQuantityProductsPerFilterCategory(Category category) {
+		TypedQuery<Long> query = getEm().createNamedQuery("numberProductsPerFilterCategory", Long.class);
+		query.setParameter("category", category);
+		
+		long quantity = query.getSingleResult();
+		
+		return (int) quantity;
+	}
+	
+	public int getQuantityProductsPerFilterBrand(Brand brand) {
+		TypedQuery<Long> query = getEm().createNamedQuery("numberProductsPerFilterBrand", Long.class);
+		query.setParameter("brand", brand);
+		
+		long quantity = query.getSingleResult();
+		
+		return (int) quantity;
+	}
+	
+	public int getQuantityProductsPerFilterUnitMeasurement(UnitMeasurement unitMeasurement) {
+		TypedQuery<Long> query = getEm().createNamedQuery("numberProductsPerFilterUnitMeasurement", Long.class);
+		query.setParameter("unitMeasurement", unitMeasurement);
 		
 		long quantity = query.getSingleResult();
 		

@@ -39,6 +39,8 @@ public interface EntityService<T> {
 	
 	public abstract PaginationInfo calculatePagination(int numberPage);
 	
+	public abstract PagedEntity<T> convertToPagedEntity(List<T> entities, PaginationInfo paginationInfo);
+	
 	public List<SimpleConstraintViolations> getListViolations();
 
 }
