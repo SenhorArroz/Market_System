@@ -24,6 +24,11 @@ import lombok.Getter;
  *  que toda entidade tem, proporcionando assim um reuso de código via heraça pelas demais classes.
  */
 
+/**
+ * Gets the classe.
+ *
+ * @return the classe
+ */
 @Getter
 public abstract class DAOGeneric<T> {
 	
@@ -127,11 +132,27 @@ public abstract class DAOGeneric<T> {
 		
 		String jpql = "select e from " + classe.getName() +" e";
 		
-		TypedQuery<T> query = em.createNamedQuery(jpql, classe);
+		TypedQuery<T> query = em.createQuery(jpql, classe);
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
 		
 		return query.getResultList();
+	}
+	
+	/**
+	 * Gets the entity quantity.
+	 *
+	 * @return the entity quantity
+	 */
+	public Long getEntityQuantity() {
+		if(classe == null) {
+			throw new UnsupportedOperationException("The class is null");
+		}
+		
+		String jpql = "select count(e.id) from " + classe.getName() + " e";
+		TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+		
+		return query.getSingleResult();
 	}
 	
 	/**
@@ -164,6 +185,10 @@ public abstract class DAOGeneric<T> {
 	public DAOGeneric<T> delete(T entity){
 		em.remove(entity);
 		return this;
+	}
+	
+	public DAOGeneric<T> deleteAtomic(T entity){
+		return openTransaction().delete(entity).closeTransaction();
 	}
 	
 	/**

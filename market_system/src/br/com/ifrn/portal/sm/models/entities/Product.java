@@ -1,5 +1,6 @@
 package br.com.ifrn.portal.sm.models.entities;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -59,7 +60,7 @@ public class Product {
 	@NonNull
 	@NotNull(message = "A unidade de medida não pode ser nula")
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private UnitMeasurement measurement;
+	private UnitMeasurement unitMeasurement;
 	
 	@NonNull
 	@NotNull(message = "A marca não pode ser nula")
@@ -84,12 +85,12 @@ public class Product {
 	@NonNull
 	@PastOrPresent(message = "A data de fabricação não pode ser posterior a hoje")
 	@Temporal(TemporalType.DATE)
-	private Date fabricationDate;
+	private Calendar fabricationDate;
 
 	@NonNull
 	@Temporal(TemporalType.DATE)
 	@Future(message = "Não pode ser cadastrado um produto já vencido")
-	private Date dueDate;
+	private Calendar dueDate;
 
 	@NonNull
 	@Column(length = 5)

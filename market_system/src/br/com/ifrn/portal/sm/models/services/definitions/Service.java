@@ -1,4 +1,4 @@
-package br.com.ifrn.portal.sm.models.services;
+package br.com.ifrn.portal.sm.models.services.definitions;
 
 import java.util.Set;
 
@@ -21,13 +21,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Service {
+public class Service<T> {
 
 	private static ValidatorFactory factory;
 	
 	private Validator validator;
 	
-	private Set<ConstraintViolation<Product>> violetions;
+	private Set<ConstraintViolation<T>> violetions;
 	
 	static {
 		try {

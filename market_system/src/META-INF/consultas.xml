@@ -14,5 +14,33 @@
 			where p.description like :searchName
 		</query>
 	</named-query>
+	
+	<named-query name="numberProductsPerFilterDescription">
+		<query>
+			select count(p.id) from Product p
+			where p.description like :searchValue		
+		</query>
+	</named-query>
+	
+	<named-query name="findByCategory">
+		<query>
+			select p from Product p
+			where p.category = :category
+		</query>
+	</named-query>
+	
+	<named-query name="findByBrand">
+		<query>
+			select p from Product p
+			where p.brand = :brand
+		</query>
+	</named-query>
+	
+	<named-query name="findByUnitMeasurement">
+		<query>
+			select p from Product p
+			where p.unitMeasurement = :unitMeasurement
+		</query>
+	</named-query>
 
 </entity-mappings>
