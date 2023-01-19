@@ -39,7 +39,7 @@ public class Pagination {
 	}
 	
 	private PaginationInfo getInfoPagination() {
-		return new PaginationInfo(numberPage, totalPages, totalEntities, start);
+		return new PaginationInfo(numberPage, totalPages, entitiesPerPage, totalEntities, start);
 	}
 	
 }

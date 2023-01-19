@@ -21,14 +21,14 @@ public class DAOBrand extends DAOGeneric<Brand>{
 	
 	public List<Brand> findByName(String name, int limit, int skip) {
 		TypedQuery<Brand> query = getEm().createNamedQuery("findBrandByName", Brand.class);
-		query.setParameter("searchDescription", "%" + name + "%");
+		query.setParameter("name", "%" + name + "%");
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
 		
 		return query.getResultList();
 	}
 	
-	public int getQuantityBrandsPerFilterDescription(String searchValue) {
+	public int getQuantityBrandsPerFilterName(String searchValue) {
 		TypedQuery<Long> query = getEm().createNamedQuery("numberBrandsPerFilterName", Long.class);
 		query.setParameter("searchValue", "%" + searchValue + "%");
 		

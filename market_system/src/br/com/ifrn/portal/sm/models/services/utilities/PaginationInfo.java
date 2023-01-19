@@ -26,7 +26,7 @@ public class PaginationInfo {
 	private Integer totalPages;
 	
 	@NonNull
-	private Integer entitiesPerPage = 5;
+	private Integer entitiesPerPage;
 	
 	@NonNull
 	private Integer totalEntities;

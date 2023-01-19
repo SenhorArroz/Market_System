@@ -5,7 +5,7 @@ module sistema_mercado {
 	requires java.validation;
 	requires jakarta.el;
 	
-	opens br.com.ifrn.portal.sm.models.services;
+	opens br.com.ifrn.portal.sm.models.services.implementation;
 	opens br.com.ifrn.portal.sm.models.infrastructure;
 	
 	/*--********| Lombok  |********--*/

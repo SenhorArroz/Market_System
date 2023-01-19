@@ -15,4 +15,46 @@
 		</query>	
 	</named-query>
 	
+	<named-query name="findCategoryByDescription">
+		<query>
+			select c from Category c
+			where c.description like :description
+		</query>	
+	</named-query>
+	
+	<named-query name="numberCategoryPerFilterDescription">
+		<query>
+			select count(c.id) from Category c
+			where c.description like :description
+		</query>	
+	</named-query>
+	
+	<named-query name="findUnitMeasurementByAcronym">
+		<query>
+			select u from UnitMeasurement u 
+			where u.acronym like :acronym
+		</query>	
+	</named-query>
+	
+	<named-query name="numberUnitMeasurementPerFilterAcronym">
+		<query>
+			select count(u.id) from UnitMeasurement u 
+			where u.acronym like :acronym
+		</query>	
+	</named-query>
+	
+	<named-query name="findUnitMeasurementByName">
+		<query>
+			select u from UnitMeasurement u 
+			where u.name like :name
+		</query>	
+	</named-query>
+	
+	<named-query name="numberUnitMeasurementPerFilterName">
+		<query>
+			select count(u.id) from UnitMeasurement u 
+			where u.name like :name
+		</query>	
+	</named-query>
+	
 </entity-mappings>

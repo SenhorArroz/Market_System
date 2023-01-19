@@ -38,6 +38,7 @@ public class DAOProduct extends DAOGeneric<Product>{
 		query.setParameter("searchDescription", "%" + description + "%");
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
+		
 		return query.getResultList();
 	}
 	

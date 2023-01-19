@@ -1,8 +1,7 @@
 package br.com.ifrn.portal.sm.models.infrastructure;
 
-import br.com.ifrn.portal.sm.models.entities.Product;
-import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
-import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
+import br.com.ifrn.portal.sm.models.entities.Category;
+import br.com.ifrn.portal.sm.models.services.implementation.CategoryService;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
 
 public class Test {
@@ -23,13 +22,19 @@ public class Test {
 		Product product = new Product(category, measurement, brand, "4353", "Açucar dumel 1 kg", dataFabricacao, dataValidade, new Byte[] {12});
 		
 		daoProduct.insertAtomic(product);*/
-		ProductService productService = new ProductService();
+		/*ProductService productService = new ProductService();
 		
 		DAOUnitMeasurement  daoUnitMeasurement = new DAOUnitMeasurement();
 		UnitMeasurement measurement = daoUnitMeasurement.findById(5L);
-		//Category category = daoCategory.findById(5L);
+		//Category category = daoCategory.findById(5L);*/
 		
-		PagedEntity<Product> paged = productService.findByUnitMeasurement(measurement,1);
+		CategoryService categoryService = new CategoryService();	
+		
+		//brandService.insert(new Brand("Unilever"));
+		
+ 		//Category category =  categoryService.findById(7L);
+		
+		PagedEntity<Category> paged =  categoryService.findByName("em", 0);
 		paged.getPaginatedEntityList().stream().forEach(e -> System.out.println(e.getDescription()));
 		System.out.println(paged.getPaginationInfo().toString());
 		
