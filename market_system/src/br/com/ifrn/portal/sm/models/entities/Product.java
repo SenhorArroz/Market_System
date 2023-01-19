@@ -54,17 +54,17 @@ public class Product {
 	
 	@NonNull
 	@NotNull(message = "A categoria não pode ser nula")
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = {CascadeType.MERGE})
 	private Category category;
 	
 	@NonNull
 	@NotNull(message = "A unidade de medida não pode ser nula")
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = {CascadeType.MERGE})
 	private UnitMeasurement unitMeasurement;
 	
 	@NonNull
 	@NotNull(message = "A marca não pode ser nula")
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = {CascadeType.MERGE})
 	private Brand brand;
 	
 	@NonNull
