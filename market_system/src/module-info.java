@@ -29,4 +29,8 @@ module sistema_mercado {
 	opens br.com.ifrn.portal.sm.views to javafx.graphics, javafx.fxml;
 	opens br.com.ifrn.portal.sm.controllers to javafx.graphics, javafx.fxml;
 	
+	requires org.junit.jupiter.api;
+	requires org.junit.platform.commons;
+	
+	opens br.com.ifrn.portal.sm.model;
 }
