@@ -3,7 +3,6 @@ package br.com.ifrn.portal.sm.models.services.implementation;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.ifrn.portal.sm.models.entities.Brand;
 import br.com.ifrn.portal.sm.models.entities.Category;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOCategory;

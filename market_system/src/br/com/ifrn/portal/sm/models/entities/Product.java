@@ -1,7 +1,6 @@
 package br.com.ifrn.portal.sm.models.entities;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -73,7 +72,7 @@ public class Product {
 	private String barCode;
 	
 	@NonNull
-	@Size(min = 5, message = "O tamanho minimo da descrição não foi atingido" )
+	@Size(min = 5, message = "O tamanho minimo da descrição não foi atingido")
 	@NotBlank(message = "A descrição é obrigatória")
 	private String description;
 	
@@ -88,8 +87,8 @@ public class Product {
 	private Calendar fabricationDate;
 
 	@NonNull
-	@Temporal(TemporalType.DATE)
 	@Future(message = "Não pode ser cadastrado um produto já vencido")
+	@Temporal(TemporalType.DATE)
 	private Calendar dueDate;
 
 	@NonNull

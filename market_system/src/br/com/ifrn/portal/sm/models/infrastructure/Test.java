@@ -1,6 +1,8 @@
 package br.com.ifrn.portal.sm.models.infrastructure;
 
+import br.com.ifrn.portal.sm.models.entities.Brand;
 import br.com.ifrn.portal.sm.models.entities.Category;
+import br.com.ifrn.portal.sm.models.services.implementation.BrandService;
 import br.com.ifrn.portal.sm.models.services.implementation.CategoryService;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
 
@@ -8,8 +10,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		/*DAOProduct daoProduct = new DAOProduct();
-		UnitMeasurement measurement = new UnitMeasurement("pc", "pacote");
+		DAOProduct daoProduct = new DAOProduct();
+		
+		/*UnitMeasurement measurement = new UnitMeasurement("pc", "pacote");
 		Brand brand = new Brand("Maratá");
 		Category category = new Category("consumivel");
 		
@@ -30,12 +33,13 @@ public class Test {
 		
 		CategoryService categoryService = new CategoryService();	
 		
+		BrandService brandService = new BrandService();
 		//brandService.insert(new Brand("Unilever"));
 		
  		//Category category =  categoryService.findById(7L);
 		
-		PagedEntity<Category> paged =  categoryService.findByName("em", 0);
-		paged.getPaginatedEntityList().stream().forEach(e -> System.out.println(e.getDescription()));
+		PagedEntity<Brand> paged =  brandService.findAll(2);
+		paged.getPaginatedEntityList().stream().forEach(e -> System.out.println(e.getName()));
 		System.out.println(paged.getPaginationInfo().toString());
 		
 		//daoProduct.findByBarCode(848374L);

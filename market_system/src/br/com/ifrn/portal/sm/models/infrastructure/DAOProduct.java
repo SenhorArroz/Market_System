@@ -14,6 +14,7 @@ import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
  * @version 1.0
  * @system DAOProduto.java
  * @date 15:42:36 9 de jan. de 2023
+ * 
  */
 
 public class DAOProduct extends DAOGeneric<Product>{
