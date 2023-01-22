@@ -2,11 +2,6 @@ package br.com.ifrn.portal.sm.views;
 	
 import java.io.IOException;
 
-import org.controlsfx.control.Notifications;
-
-import br.com.ifrn.portal.sm.models.entities.Product;
-import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
-import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +9,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
+ * 
  * @author erikv
  * @version 1.0
  * @system App.java
  * @date 9:20:55 7 de jan. de 2023 2023
+ * 
  */
 
 public class App extends Application {
@@ -58,8 +55,6 @@ public class App extends Application {
 		return loader.load();
 	}
 	
-	
-	//Alteracao
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -5,6 +5,7 @@ module sistema_mercado {
 	requires java.validation;
 	requires jakarta.el;
 	
+	opens br.com.ifrn.portal.sm.model;
 	opens br.com.ifrn.portal.sm.models.services.implementation;
 	opens br.com.ifrn.portal.sm.models.infrastructure;
 	
@@ -31,6 +32,6 @@ module sistema_mercado {
 	
 	requires org.junit.jupiter.api;
 	requires org.junit.platform.commons;
+	requires javafx.graphics;
 	
-	opens br.com.ifrn.portal.sm.model;
 }

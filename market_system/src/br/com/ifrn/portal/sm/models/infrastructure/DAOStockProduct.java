@@ -25,7 +25,7 @@ public class DAOStockProduct extends DAOGeneric<StockProduct>{
 	
 	public List<StockProduct> findByQuantityLessThan(int quantity, int limit, int skip) {
 		TypedQuery<StockProduct> query = getEm().createNamedQuery("findByQuantityLessThan", StockProduct.class);
-		query.setParameter("searchDescription", "%" + quantity + "%");
+		query.setParameter("searchDescription", quantity);
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
 		
@@ -34,11 +34,29 @@ public class DAOStockProduct extends DAOGeneric<StockProduct>{
 	
 	public List<StockProduct> findByQuantityGreaterThan(int quantity, int limit, int skip) {
 		TypedQuery<StockProduct> query = getEm().createNamedQuery("findByQuantityGreaterThan", StockProduct.class);
-		query.setParameter("searchDescription", "%" + quantity + "%");
+		query.setParameter("searchDescription", quantity);
 		query.setFirstResult(skip);
 		query.setMaxResults(limit);
 		
 		return query.getResultList();
+	}
+	
+	public int getQuantityStockProductsPerFilterQuantityLessThan(int quantity) {
+		TypedQuery<Long> query = getEm().createNamedQuery("numberStockProductsPerFilterQuantityLessThan", Long.class);
+		query.setParameter("searchQuantity", quantity);
+		
+		long value = query.getSingleResult();
+		
+		return (int) value;
+	}
+	
+	public int getQuantityStockProductsPerFilterQuantityGreaterThan(int quantity) {
+		TypedQuery<Long> query = getEm().createNamedQuery("nnumberStockProductsPerFilterQuantityGreaterThan", Long.class);
+		query.setParameter("searchQuantity", quantity);
+		
+		long value = query.getSingleResult();
+		
+		return (int) value;
 	}
 
 }

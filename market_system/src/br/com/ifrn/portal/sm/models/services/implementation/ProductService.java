@@ -1,6 +1,7 @@
 package br.com.ifrn.portal.sm.models.services.implementation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.ifrn.portal.sm.models.entities.Brand;
@@ -9,12 +10,13 @@ import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOProduct;
-import br.com.ifrn.portal.sm.models.services.utilities.PaginationInfo;
+import br.com.ifrn.portal.sm.models.services.definitions.EntityAnonymService;
 import br.com.ifrn.portal.sm.models.services.definitions.EntityService;
 import br.com.ifrn.portal.sm.models.services.definitions.Service;
-import br.com.ifrn.portal.sm.models.services.utilities.ProductFindType;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
 import br.com.ifrn.portal.sm.models.services.utilities.Pagination;
+import br.com.ifrn.portal.sm.models.services.utilities.PaginationInfo;
+import br.com.ifrn.portal.sm.models.services.utilities.enums.ProductFindType;
 import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
 
 /**
@@ -28,7 +30,7 @@ import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
  * evitando assim, o acoplamento entre regras de negócios e a classe modelo.
  */
 
-public class ProductService extends Service<Product> implements EntityService<Product>{
+public class ProductService extends Service<Product> implements EntityAnonymService<Product>, EntityService<Product>{
 	
 	/** The dao product. */
 	private DAOProduct daoProduct;
@@ -52,8 +54,14 @@ public class ProductService extends Service<Product> implements EntityService<Pr
 		boolean isValid = validate(entity);
 		
 		if (isValid) {
-			daoProduct.insertAtomic(entity);
-			return true;
+			try {
+				daoProduct.insertAtomic(entity);
+				return true;
+			} catch (Exception e) {
+				SimpleConstraintViolations violation = new SimpleConstraintViolations(e.getMessage(), e.getCause().getMessage());
+				List<SimpleConstraintViolations> listViolations = new ArrayList<>(Arrays.asList(violation));
+				throw new InvalidDataException(listViolations);
+			}
 			
 		}else {
 			List<SimpleConstraintViolations> listViolations = getListViolations();

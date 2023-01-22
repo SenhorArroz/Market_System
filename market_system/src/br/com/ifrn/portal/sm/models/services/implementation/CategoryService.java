@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.ifrn.portal.sm.models.entities.Category;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOCategory;
+import br.com.ifrn.portal.sm.models.services.definitions.EntityAnonymService;
 import br.com.ifrn.portal.sm.models.services.definitions.EntityService;
 import br.com.ifrn.portal.sm.models.services.definitions.Service;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
@@ -23,7 +24,7 @@ import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
  * @system_unity_description Classe responsável por implementar os serviços da entidade categoria.
  */
 
-public class CategoryService extends Service<Category> implements EntityService<Category>{
+public class CategoryService extends Service<Category> implements EntityAnonymService<Category>, EntityService<Category>{
 
 	/** The dao category. */
 	private DAOCategory daoCategory;

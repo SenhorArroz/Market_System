@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOUnitMeasurement;
+import br.com.ifrn.portal.sm.models.services.definitions.EntityAnonymService;
 import br.com.ifrn.portal.sm.models.services.definitions.EntityService;
 import br.com.ifrn.portal.sm.models.services.definitions.Service;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
@@ -24,7 +25,7 @@ import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
  * 
  */
 
-public class UnitMeasurementService extends Service<UnitMeasurement> implements EntityService<UnitMeasurement> {
+public class UnitMeasurementService extends Service<UnitMeasurement> implements EntityAnonymService<UnitMeasurement>, EntityService<UnitMeasurement>{
 
 	private DAOUnitMeasurement daoUnitMeasurement;
 

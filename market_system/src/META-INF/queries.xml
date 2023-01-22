@@ -3,15 +3,29 @@
 
 	<named-query name="findByQuantityLessThan">
 		<query>
-			select sp from StockProduct sp
-			where sp.quantity &lt;= :quantity
+			select SP from StockProduct SP
+			where SP.quantity &lt;= :quantity
 		</query>
 	</named-query>
 	
 	<named-query name="findByQuantityGreaterThan">
 		<query>
-			select sp from StockProduct sp
-			where sp.quantity &gt;= :quantity
+			select SP from StockProduct SP
+			where SP.quantity &gt;= :quantity
+		</query>
+	</named-query>
+	
+	<named-query name="numberStockProductsPerFilterQuantityLessThan">
+		<query>
+			select count(SP.id) from StockProduct SP
+			where SP.quantity &lt;= :searchQuantity
+		</query>
+	</named-query>
+	
+	<named-query name="numberStockProductsPerFilterQuantityGreaterThan">
+		<query>
+			select count(SP.id) from StockProduct SP
+			where SP.quantity &gt;= :searchQuantity
 		</query>
 	</named-query>
 

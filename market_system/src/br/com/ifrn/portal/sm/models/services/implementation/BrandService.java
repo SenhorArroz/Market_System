@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.ifrn.portal.sm.models.entities.Brand;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOBrand;
+import br.com.ifrn.portal.sm.models.services.definitions.EntityAnonymService;
 import br.com.ifrn.portal.sm.models.services.definitions.EntityService;
 import br.com.ifrn.portal.sm.models.services.definitions.Service;
 import br.com.ifrn.portal.sm.models.services.utilities.PagedEntity;
@@ -22,7 +23,7 @@ import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
  * 
  */
 
-public class BrandService  extends Service<Brand> implements EntityService<Brand>{
+public class BrandService  extends Service<Brand> implements EntityAnonymService<Brand>, EntityService<Brand>{
 
 	/** The dao brand. */
 	private DAOBrand daoBrand;

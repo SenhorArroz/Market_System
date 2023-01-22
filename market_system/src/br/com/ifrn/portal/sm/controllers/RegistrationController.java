@@ -1,10 +1,8 @@
 package br.com.ifrn.portal.sm.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -59,7 +57,7 @@ public class RegistrationController {
 		if(fieldValids()) {
 			product = new Product();
 			
-			product.setDueDate(getCalendar("10/01/2023"));
+			product.setDueDate(LocalDate.now());
 			product.setDescription(fieldDescription.getText());
 			
 			service = new ProductService();
@@ -92,17 +90,6 @@ public class RegistrationController {
 			alert.showAndWait();
 		}
 		
-	}
-	
-	private Calendar getCalendar(String date) {
-		try {
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(new SimpleDateFormat("dd-MM-yyyy").parse(date));
-			
-			return calendar;
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("Data inválida");
-		}
 	}
 	
 	private boolean fieldValids() {
