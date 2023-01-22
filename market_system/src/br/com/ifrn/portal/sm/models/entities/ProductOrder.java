@@ -1,7 +1,6 @@
 package br.com.ifrn.portal.sm.models.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -26,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * 
  * @author V1NI-Zatarash
+ * @secondary_author erikv modified in: 16:04:54 22 de jan. de 2023
  * @version 1.0
  * @date 13:40:13 20 de jan. de 2023
  * @system_unity_description Classe modelo de item pedido de pedidos
@@ -44,9 +43,6 @@ public class ProductOrder {
 	
 	@OneToOne
 	private Provider provider;
-	
-	@ManyToMany
-	private List<Product> products;
 	
 	@NonNull
 	@DecimalMin(value = "0.0", message = "Valor inv�lido")

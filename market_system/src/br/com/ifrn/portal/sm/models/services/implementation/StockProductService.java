@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
+import br.com.ifrn.portal.sm.models.entities.ProductOrder;
 import br.com.ifrn.portal.sm.models.entities.StockProduct;
+import br.com.ifrn.portal.sm.models.entities.enums.OrderStatus;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOProduct;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOStockProduct;
@@ -53,8 +55,12 @@ public class StockProductService extends Service<StockProduct> implements Entity
 		}
 	}
 	
-	public boolean insertProductOrder(String order) {
-		
+	public boolean insertProductOrder(ProductOrder order) {
+		if(order.getOrderStatus() == OrderStatus.DELIVERED) {
+			
+		}else {
+			
+		}
 		return false;
 	}
 
