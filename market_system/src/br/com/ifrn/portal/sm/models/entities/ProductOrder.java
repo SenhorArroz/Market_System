@@ -1,16 +1,17 @@
 package br.com.ifrn.portal.sm.models.entities;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
@@ -20,6 +21,7 @@ import br.com.ifrn.portal.sm.models.entities.enums.OrderStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 
@@ -32,14 +34,19 @@ import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
-public class Order {
+public class ProductOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long idProvider;
+	@OneToOne
+	private Provider provider;
+	
+	@ManyToMany
+	private List<Product> products;
 	
 	@NonNull
 	@DecimalMin(value = "0.0", message = "Valor inv�lido")
@@ -58,20 +65,18 @@ public class Order {
 	
 	@NonNull
 	@PastOrPresent(message = "A data de pedido n�o pode ser posterior a hoje")
-	@Temporal(TemporalType.DATE)
-	private Calendar orderDate;
+	private LocalDate orderDate;
 	
 	@NonNull
-	@Temporal(TemporalType.DATE)
 	@Future(message = "Essa é a previsão da entrega")
-	private Calendar deliveryForecast;
+	private LocalDate deliveryForecast;
 	
 	@NonNull
 	@Column(scale = 7, precision = 2)
 	private Double totalValue;
 	
 	@NonNull
+	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
-	
 
 }

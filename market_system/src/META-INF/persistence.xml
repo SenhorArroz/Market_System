@@ -12,6 +12,8 @@
 		<class>br.com.ifrn.portal.sm.models.entities.UnitMeasurement</class>
 		<class>br.com.ifrn.portal.sm.models.entities.Brand</class>
 		<class>br.com.ifrn.portal.sm.models.entities.StockProduct</class>
+		<class>br.com.ifrn.portal.sm.models.entities.ProductOrder</class>
+		<class>br.com.ifrn.portal.sm.models.entities.Provider</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" 

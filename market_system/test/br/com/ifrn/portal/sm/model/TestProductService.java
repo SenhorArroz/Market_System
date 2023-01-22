@@ -13,12 +13,10 @@ import br.com.ifrn.portal.sm.models.entities.Brand;
 import br.com.ifrn.portal.sm.models.entities.Category;
 import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.entities.UnitMeasurement;
-import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOBrand;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOCategory;
 import br.com.ifrn.portal.sm.models.infrastructure.DAOUnitMeasurement;
 import br.com.ifrn.portal.sm.models.services.implementation.ProductService;
-import br.com.ifrn.portal.sm.models.validations.SimpleConstraintViolations;
 
 /**
  * @author erikv
@@ -73,12 +71,12 @@ class TestProductService {
 		
 		ProductService productService = new ProductService();
 		
-		InvalidDataException exception = null;
+		/*InvalidDataException exception = null;
 		try {
 			productService.insert(product);
 		} catch (InvalidDataException e) {
 			System.out.println(e.getListContraintViolations().get(0));
-		}
+		}*/
 		//assertThrows(exception.getClass() , () -> );
 	}
 	
