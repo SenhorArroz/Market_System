@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.entities.StockProduct;
 
 /**
@@ -21,6 +22,13 @@ public class DAOStockProduct extends DAOGeneric<StockProduct>{
 
 	public DAOStockProduct() {
 		super(StockProduct.class);
+	}
+	
+	public StockProduct findByProduct(Product product) {
+		TypedQuery<StockProduct> query = getEm().createNamedQuery("findByProduct", StockProduct.class);
+		query.setParameter("searchProduct", product);
+		
+		return query.getSingleResult();
 	}
 	
 	public List<StockProduct> findByQuantityLessThan(int quantity, int limit, int skip) {

@@ -1,7 +1,6 @@
 package br.com.ifrn.portal.sm.models.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
@@ -20,6 +19,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import br.com.ifrn.portal.sm.models.entities.enums.ProductStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -49,19 +49,19 @@ public class Product {
 	
 	@NonNull
 	@NotNull(message = "A categoria não pode ser nula")
-	@OneToOne(cascade = {CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(nullable = false)
 	private Category category;
 	
 	@NonNull
 	@NotNull(message = "A unidade de medida não pode ser nula")
-	@OneToOne(cascade = {CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(nullable = false)
 	private UnitMeasurement unitMeasurement;
 	
 	@NonNull
 	@NotNull(message = "A marca não pode ser nula")
-	@OneToOne(cascade = {CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(nullable = false)
 	private Brand brand;
 	
@@ -84,13 +84,18 @@ public class Product {
 	
 	@NonNull
 	@PastOrPresent(message = "A data de fabricação não pode ser posterior a hoje")
+	@NotNull(message = "A data de fabricação não pode ser nula")
 	@Column(nullable = false)
 	private LocalDate fabricationDate;
 
 	@NonNull
 	@Future(message = "Não pode ser cadastrado um produto já vencido")
+	@NotNull(message = "A data de validade não pode ser nula")
 	@Column(nullable = false)
 	private LocalDate dueDate;
+
+	@NotNull(message = "O status do produto não pode ser nulo")
+	private ProductStatus productStatus;
 
 	@NonNull
 	@Size(max = 16777215, message = "A imagem ultrapassou tamanho máximo suportado")

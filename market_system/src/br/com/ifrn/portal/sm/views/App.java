@@ -26,16 +26,15 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
 			janela = primaryStage;
 			
 			//Exemplos
-			Parent parent1 = getParent("/br/com/ifrn/portal/sm/views/ScreenHome.fxml");
+			Parent parent1 = getParent("/br/com/ifrn/portal/sm/views/AddProduto.fxml");
 			Parent parent2 = getParent("/br/com/ifrn/portal/sm/views/ScreenRegistration.fxml");
 			/*OBS: aqui está sendo carregando duas telas do sistemas, mas isso não poderá ocorrer
 			 * com todas as telas pois irá afetar no desempenho do software. Sendo assim, o carregamento 
 			 * deverá ser feito por demanda, isto é, quando o usuários quiser usar as funcionalidades 
-			 * de determinada tela */
+			 * de determinada tela essa tela tem que ser carregado no momento do uso*/
 			
 			cenaInicio = new Scene(parent1);
 			cenaCadastro = new Scene(parent2);

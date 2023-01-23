@@ -1,6 +1,7 @@
 package br.com.ifrn.portal.sm.models.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
@@ -41,14 +43,11 @@ public class ProductOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
-	private Provider provider;
+	@OneToMany(mappedBy = "productOrder")
+	private List<ItemOrder> itensOrder;
 	
-	@NonNull
-	@DecimalMin(value = "0.0", message = "Valor inv�lido")
-	@DecimalMax(value = "10000.00", message = "Valor m�ximo ultrapassado")
-	@Column(scale = 7, precision = 2)
-	private Double value;
+	@ManyToOne
+	private Provider provider;
 	
 	@NonNull
 	private Integer theAmount;

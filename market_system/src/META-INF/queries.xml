@@ -28,5 +28,12 @@
 			where SP.quantity &gt;= :searchQuantity
 		</query>
 	</named-query>
+	
+	<named-query name="findByProduct">
+		<query>
+			select SP from StockProduct SP
+			where SP.product = :searchProduct
+		</query>
+	</named-query>
 
 </entity-mappings>

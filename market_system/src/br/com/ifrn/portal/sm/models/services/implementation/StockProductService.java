@@ -1,6 +1,7 @@
 package br.com.ifrn.portal.sm.models.services.implementation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
@@ -58,16 +59,40 @@ public class StockProductService extends Service<StockProduct> implements Entity
 	public boolean insertProductOrder(ProductOrder order) {
 		if(order.getOrderStatus() == OrderStatus.DELIVERED) {
 			
-		}else {
+			order.getItensOrder().stream().forEach(i -> {
+				StockProduct stockProduct = findByProduct(i.getProduct());
+				stockProduct.setQuantity(i.getQuantity());
+				update(stockProduct);
+			});
 			
+			return true;
+		}else {
+			SimpleConstraintViolations violation = new SimpleConstraintViolations(
+					"Não pode ser inserido um pedido que ainda não foi entregue",
+					order.getOrderStatus()
+			);
+			
+			List<SimpleConstraintViolations> listViolations = 
+					new ArrayList<>(Arrays.asList(violation));
+			
+			throw new InvalidDataException(listViolations);
 		}
-		return false;
 	}
 
 	@Override
 	public StockProduct findById(Long id) {
 		try {
 			StockProduct stockProduct = daoStockProduct.findById(id);
+			return stockProduct;
+			
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Id inválido");
+		}
+	}
+	
+	public StockProduct findByProduct(Product product) {
+		try {
+			StockProduct stockProduct = daoStockProduct.findByProduct(product);
 			return stockProduct;
 			
 		} catch (Exception e) {
@@ -101,7 +126,7 @@ public class StockProductService extends Service<StockProduct> implements Entity
 	public PagedEntity<StockProduct> findByQuantityGreaterThan(int quantity) {
 		return findByQuantityGreaterThan(quantity);
 	}
-
+	
 	/**
 	 * Find by name.
 	 *
@@ -130,7 +155,6 @@ public class StockProductService extends Service<StockProduct> implements Entity
 	public PagedEntity<StockProduct> findAll() {
 		return findAll(1);
 	}
-
 
 	/**
 	 * Find all.
@@ -316,7 +340,7 @@ public class StockProductService extends Service<StockProduct> implements Entity
 
 	
 	private Double calculateValueToSale(double unitValue, double percentage, double discount) {
-		Double result = (unitValue * (1 + percentage)) * 1 - discount;
+		Double result = (unitValue * (1.0 + percentage)) * (1 - discount);
 		
 		return result;
 	}

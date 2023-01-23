@@ -33,6 +33,7 @@ public class ItemOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NonNull
 	@ManyToOne
 	private ProductOrder productOrder;
 	

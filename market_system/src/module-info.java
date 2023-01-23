@@ -6,7 +6,7 @@ module sistema_mercado {
 	requires java.validation;
 	requires jakarta.el;
 	
-	opens br.com.ifrn.portal.sm.model;
+	opens br.com.ifrn.portal.sm.service;
 	opens br.com.ifrn.portal.sm.models.services.implementation;
 	opens br.com.ifrn.portal.sm.models.infrastructure;
 	
