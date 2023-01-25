@@ -96,6 +96,7 @@ public class CategoryService extends Service<Category> implements EntityAnonymSe
 			PaginationInfo paginationInfo = calculatePaginationWithFilterDescription(description, numberPage);
 			PagedEntity<Category> pagedEntity = getPagedEntityByFindDescription(description, paginationInfo);
 			
+			
 			return pagedEntity;
 		}else {
 			throw new IllegalArgumentException("Nome da categoria ou página inválida");

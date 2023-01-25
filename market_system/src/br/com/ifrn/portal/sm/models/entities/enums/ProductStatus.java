@@ -12,7 +12,7 @@ package br.com.ifrn.portal.sm.models.entities.enums;
 
 public enum ProductStatus {
 
-	ATIVO,
-	INATIVO;
+	ACTIVE,
+	INATIVE;
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.ifrn.portal.sm.models.entities.Product;
 import br.com.ifrn.portal.sm.models.entities.ProductOrder;
+import br.com.ifrn.portal.sm.models.entities.SaleReturnItem;
 import br.com.ifrn.portal.sm.models.entities.StockProduct;
 import br.com.ifrn.portal.sm.models.entities.enums.OrderStatus;
 import br.com.ifrn.portal.sm.models.exceptions.InvalidDataException;
@@ -68,7 +69,7 @@ public class StockProductService extends Service<StockProduct> implements Entity
 			return true;
 		}else {
 			SimpleConstraintViolations violation = new SimpleConstraintViolations(
-					"Não pode ser inserido um pedido que ainda não foi entregue",
+					"Não pode ser inserido um pedido que foi cancelado ou que ainda não foi entregue ",
 					order.getOrderStatus()
 			);
 			
@@ -203,11 +204,30 @@ public class StockProductService extends Service<StockProduct> implements Entity
 	}
 	
 	public boolean decreaseTheQuantityOfProductPerSale(String sale) {
+		if(!sale.isBlank()) {
+			new ArrayList<Object>().stream().forEach(i -> {
+				StockProduct stockProduct = findByProduct(new Product());
+				stockProduct.setQuantity(stockProduct.getQuantity()); // - item.getQuantity
+				
+				update(stockProduct);
+			});
+			
+			return true;
+		}else {
+			
+			return false;
+		}
 		
-		return false;
 	}
 	
-	public boolean returnProdutcs(List<String> saleItens) {
+	public boolean returnProdutcs(List<SaleReturnItem> saleReturnItens) {
+		
+		saleReturnItens.stream().forEach(i -> {
+				StockProduct stockProduct = findByProduct(new Product()); //item.getProduct()
+				stockProduct.setQuantity(stockProduct.getQuantity() + i.getReturnQuantity());
+				
+				update(stockProduct);
+		});
 		
 		return false;
 	}
@@ -302,6 +322,18 @@ public class StockProductService extends Service<StockProduct> implements Entity
 	}
 	
 	/**
+	 * Convert to paged entity.
+	 *
+	 * @param entities       the entities
+	 * @param paginationInfo the pagination info
+	 * @return the paged entity
+	 */
+	@Override
+	public PagedEntity<StockProduct> convertToPagedEntity(List<StockProduct> entities, PaginationInfo paginationInfo) {
+		return new PagedEntity<StockProduct>(entities, paginationInfo);
+	}
+	
+	/**
 	 * Calculate pagination with filter name.
 	 *
 	 * @param searchValue the search value
@@ -324,18 +356,6 @@ public class StockProductService extends Service<StockProduct> implements Entity
 		PaginationInfo infoPagination =  pagination.getPagination(quantity, numberPage);
 		
 		return infoPagination;
-	}
-
-	/**
-	 * Convert to paged entity.
-	 *
-	 * @param entities       the entities
-	 * @param paginationInfo the pagination info
-	 * @return the paged entity
-	 */
-	@Override
-	public PagedEntity<StockProduct> convertToPagedEntity(List<StockProduct> entities, PaginationInfo paginationInfo) {
-		return new PagedEntity<StockProduct>(entities, paginationInfo);
 	}
 
 	

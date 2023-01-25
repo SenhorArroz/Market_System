@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -91,11 +93,12 @@ public class Product {
 	@NonNull
 	@Future(message = "Não pode ser cadastrado um produto já vencido")
 	@NotNull(message = "A data de validade não pode ser nula")
-	@Column(nullable = false)
+	@Column(nullable = false, scale = 7,precision = 2)
 	private LocalDate dueDate;
 
 	@NotNull(message = "O status do produto não pode ser nulo")
-	private ProductStatus productStatus;
+	@Enumerated(value = EnumType.STRING)
+	private ProductStatus productStatus = ProductStatus.ACTIVE;
 
 	@NonNull
 	@Size(max = 16777215, message = "A imagem ultrapassou tamanho máximo suportado")

@@ -33,9 +33,9 @@ class TestStockProductService {
 		UnitMeasurementService unitMeasurementService = new UnitMeasurementService();
 		
 		//Busca no banco de dados a marca/categoria/unidade de medida a qual eu quero relacionar ao produto
-		Brand brand = brandService.findById(8L);
-		Category category = categoryService.findById(4L);
-		UnitMeasurement measurement = unitMeasurementService.findById(4L);
+		Brand brand = brandService.findById(12L);
+		Category category = categoryService.findById(5L);
+		UnitMeasurement measurement = unitMeasurementService.findById(5L);
 		
 		//definiçao das datas de fabricação e validade do produto
 		LocalDate dateFabrication = LocalDate.parse("2020-12-20");
@@ -49,12 +49,12 @@ class TestStockProductService {
 			codigo de barras, descrição do produto, a data de fabricação e validade. O último e um 
 			array de Bytes que corresponde a uma imagem 
 		*/
-		Product product = new Product(category, measurement, brand, "327632", "Biscoito treloso", dateFabrication, dateValid, imagen);
+		Product product = new Product(category, measurement, brand, "4332232", "Bolinho Bauduco 50g", dateFabrication, dateValid, imagen);
 		
 		/*Criando uma registro desse produto no estoque
 		é passado a quantidade do produto, por padrão é 0, o valor unitário do produto, a 
 		pocentagem de venda e o desconto do produto*/
-		StockProduct stockProduct = new StockProduct(product, 0, 20.1, 0.4, 0.1);
+		StockProduct stockProduct = new StockProduct(product, 0, 1.60, 0.3, 0.1);
 		
 		//Chamando a classe de servico do estoque
 		StockProductService stockProductService = new StockProductService();

@@ -6,13 +6,14 @@
 		
 		<mapping-file>META-INF/productsQueries.xml</mapping-file>
 		<mapping-file>META-INF/productComponentsQueries.xml</mapping-file>
-		<mapping-file>META-INF/queries.xml</mapping-file>
+		<mapping-file>META-INF/stockProductQueries.xml</mapping-file>
 		<class>br.com.ifrn.portal.sm.models.entities.Product</class>
 		<class>br.com.ifrn.portal.sm.models.entities.Category</class>
 		<class>br.com.ifrn.portal.sm.models.entities.UnitMeasurement</class>
 		<class>br.com.ifrn.portal.sm.models.entities.Brand</class>
 		<class>br.com.ifrn.portal.sm.models.entities.StockProduct</class>
 		<class>br.com.ifrn.portal.sm.models.entities.ProductOrder</class>
+		<class>br.com.ifrn.portal.sm.models.entities.ItemOrder</class>
 		<class>br.com.ifrn.portal.sm.models.entities.Provider</class>
 		
 		<properties>
